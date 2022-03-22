@@ -17,7 +17,7 @@ Many of the maps will require additional frameworks to function correctly. If yo
   * You can run the [Bulk Assignable Damage](/RPTools%20Macros/Bulk%20Assignable%20Damage.mtmacro) macro on these monster tokens to make the damage output into links that can then be applied to players (Takehara based). 
 * [Wolph42's 'Drop-in' Bag of MT Tricks](https://forums.rptools.net/viewtopic.php?p=274501#p274501) for triggered elevation changes and for general quality of life
 
-## Additional Resource
+## Additional Resources
 [Encounter adjustment](https://haluz.org/lmop/index.php) for adjusting modules based on the number and level of your players.
 ## Support
 For live help, drop into the [Discord server](https://discord.gg/XqFRn4gx)
