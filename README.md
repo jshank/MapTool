@@ -1,6 +1,7 @@
 # MapTool
 MapTool VTT Resources 
 
+![!img](Art%20Assets/WEC%20Sample.png)
 This repository holds assets (maps, tokens, art and macros) for [RPTools MapTool](https://www.rptools.net/toolbox/maptool/). I'm currently running campaigns for Dungeons & Dragons 5e so the majority of files will be in that vein.
 
 Many of the maps will require additional frameworks to function correctly. If you want full functionality, please make sure to install the following in order to load the map without errors:
