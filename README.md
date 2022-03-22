@@ -18,6 +18,9 @@ Many of the maps will require additional frameworks to function correctly. If yo
 
 ## Support
 For live help, drop into the [Discord server](https://discord.gg/XqFRn4gx)
+
 [RPTools Wiki](https://wiki.rptools.info/index.php/Main_Page) for tons of information on how to run and troubleshoot macros
+
 [RPTools Forum](https://forums.rptools.net/) for async support and research
+
 [r/MapTool](https://www.reddit.com/r/MapTool/) for more ideas and annoucements
