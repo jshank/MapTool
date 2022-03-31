@@ -1,4 +1,4 @@
-#RPTools Macros
+# RPTools Macros
 
 ## Bulk Assignable Damage
 Select any number of JMR's monster tokens and this macro will replace the default damage amounts with clickable links. Highlight a target character and click the link to bring up the Takehara damage assignment screen.
