@@ -26,3 +26,6 @@ not found on source map, skipping.
  
 Finished. Replaced macros on 9/10 Monster tokens. Check output for missing tokens
 ```
+
+## JMR Rechargable Attacks
+An example of a rechargable attack using Young Green Dragon's Poison Breath. The first click uses up the charge, changes the button name/color. The next click rolls for a recharge. If successful, the button is returned to the original state.

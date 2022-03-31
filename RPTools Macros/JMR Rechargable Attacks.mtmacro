@@ -1,0 +1,20 @@
+[h:wName="Poison Breath"]
+[h: recharge_roll = 1d6]
+[h:wDesc="The dragon exhales poisonous gas in a 30-foot cone. Each creature in that area must make a <b>DC 14</b> Constitution saving throw, taking 42 (<b>12d6</b>) poison damage on a failed save, or half as much damage on a successful one.<br>"]
+[h: onCooldown = endsWith(json.get(getMacroProps(getMacroButtonIndex(), "json"), "label"), "Recharge")]
+[h, if(onCooldown),code:{
+	[if(recharge_roll > 4), code:{
+		[wDesc = "<b>Poison breath is recharged</b>"]
+		[h: cdLabel = json.set("{}", "label", wName, "color", "maroon")] 
+		[h: setMacroProps(getMacroButtonIndex(), cdLabel)]
+		};{
+	 	[wDesc = "Poison breath still on cooldown"]
+		}]
+	};{
+	[h: cdLabel = json.set("{}", "label", "Poison Breath Recharge", "color", "gray")] 
+	[h: setMacroProps(getMacroButtonIndex(), cdLabel)]
+}]
+
+[h:mOutput = evalMacro('<div style="background-color: maroon; color: #FFFFFF; padding-top:2px; padding-bottom:1px; padding-left:5px; padding-right:5px;"><b> {token.name} - {wName} </b><div style="background-color:#FFFFFF; color: #000000; padding:2px;">{wDesc}</div></div>')]
+[h:mChannel="gm-self"]
+[h:broadcast(mOutput,mChannel)]
