@@ -1,0 +1,56 @@
+[h: vInputHeader = "header| <html><div style='font-size:12pt;text-align: center'><b>This will replace all monster action macros on <br>the current map WITHOUT CONFIRMATION<br>Click OK to proceed or Cancel to abort.</div></html>||LABEL|SPAN=TRUE"]
+[h: vStatus = input(vInputHeader)]
+[h: abort(vStatus)]
+[h: maps = getAllMapNames(",")]
+[h: maps = listsort(maps, "N")]
+[h: input("sourceMapName|" + maps + "|Select Monster Tokens map|LIST|SELECT=0 VALUE=STRING")]
+
+[h: broadcast("<b>Beginning token update...</b><br>", "gm")]
+<!--
+Process:
+    -Get a list of all "Monster"
+type tokens on the map
+    -
+    For each monster token, search the designated map
+for a matching token name(prefix) -
+    Delete the existing actions group -
+    Copy the targets action group macros into the token
+    -->
+    [h: cond = '{ "propertyType": "Monster" }']
+    [h: localMonsters = getTokens("json", cond)]
+    [h: foundCounter = 0]
+    [h: totalLocalMonsters = listcount(localMonsters)]
+    [h: targetMacroGroup = "-Actions"]
+
+[h, foreach(localMonsterId, localMonsters), CODE: {
+    [localMonsterName = getName(localMonsterId)]
+    [localMonsterNameTrimmed = replace(localMonsterName, "(.*?) [0-9]+", "\$1")]
+    [broadcast("Searching for " + localMonsterNameTrimmed + "...", "gm")]
+    [templateMonsterId = findToken(localMonsterNameTrimmed, sourceMapName)]
+    [
+        if (templateMonsterId != ""), code: {
+            [foundCounter = foundCounter + 1]
+            [broadcast("<p style='color:green;'> Found! Replacing all macros.</p><br>", "gm")]
+
+            ["Wipe out all the -Actions macros"]
+            [localAction_ids = getMacroGroup(targetMacroGroup, "json", localMonsterId)]
+            [foreach(localAction_id, localAction_ids): removeMacro(localAction_id, localMonsterId)]
+
+            ["Copy the macros from the source into the new"]
+            [sourceActionIds = getMacroGroup(targetMacroGroup, "json", templateMonsterId, sourceMapName)]
+            [foreach(sourceActionId, sourceActionIds): createMacro(getMacroProps(sourceActionId, "json", templateMonsterId, sourceMapName), localMonsterId)]
+        }; {
+            [broadcast("<p style='color:red;'> not found on source map, skipping.</p><br>", "gm")]
+        }
+    ]
+}]
+
+[h: "We're done, let's send some pretty output on what happened. Green if all is well, red if some were missed"]
+[h: missedCount = totalLocalMonsters - foundCounter]
+[h,
+    if (missedCount > 0), code: {
+        [h: broadcast(strformat("<p style='color:red;'>Finished. Replaced macros on %{foundCounter}/%{totalLocalMonsters} Monster tokens. Check output for missing tokens</p>"), "gm")]
+    }; {
+        [h: broadcast(strformat("<p style='color:green;'>Finished. Replaced macros on %{foundCounter}/%{totalLocalMonsters} Monster tokens.</p>"), "gm")]
+    }
+]
