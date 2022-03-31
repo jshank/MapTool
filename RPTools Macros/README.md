@@ -12,7 +12,7 @@ This macro will search another map for tokens matching a specific naming pattern
 - Initial warning with abort on cancel
 - Allow a map to be selected from a dropdown populated with all maps
 - Replace macro logic based on a specific macrogroup (safer)
-- Select target macros based on a regular expression
+- Select target tokens based on a regular expression
 - Easy inline commenting
 - Colorized output based on success
 - Example output when this macro is run:
